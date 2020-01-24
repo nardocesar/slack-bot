@@ -27,20 +27,34 @@ const postBlockMessage = (blockMessage) => {
 };
 
 const handleMessage = (message) => {
-    if(message.includes('top 10')){
+    const msg = message.toLowerCase();
+
+    if(msg.includes('top 10')){
         services.getTop10Gyms()
             .then(data => {
                 const message = formatter.topGymsFormatter(data.gyms);
+                console.log(message);
                 postBlockMessage(message);
                 
             });
         return;
     }
 
-    if(message.includes('daily books')){
+    if(msg.includes('daily books')){
         services.getBooking()
             .then(data => {
                 const message = formatter.bookingFormatter(data.gyms);
+                postBlockMessage(message);
+            });
+        return;
+    }
+
+    if(msg.includes('book')){
+        const gymName = msg.replace('book ', '');
+        services.getGymInfo()
+            .then(data => {
+                const gymToBook = data.gyms.filter(gym => gym.name.toLowerCase() === gymName);
+                const message = formatter.gymInfoFormatter(gymToBook);
                 postBlockMessage(message);
             });
         return;

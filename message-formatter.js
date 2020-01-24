@@ -2,6 +2,8 @@ const topGymsFormatter = (list) => list.map(topGymsProcessor);
 
 const bookingFormatter = (list) => list.map(bookingProcessor);
 
+const gymInfoFormatter = (list) => list.map(gymInfoProcessor);
+
 const topGymsProcessor = (gym) => ({
     type: 'section',
     text: {
@@ -20,7 +22,16 @@ const bookingProcessor = (gym) => ({
     }
 })
 
+const gymInfoProcessor = (gym) => ({
+    type: 'section',
+    text: {
+        type: 'mrkdwn',
+        text: `Quer agendar uma aula em ${gym.name}? - <${gym.url}|Agendar>`
+    }
+})
+
 module.exports = {
     topGymsFormatter,
-    bookingFormatter
+    bookingFormatter,
+    gymInfoFormatter
 }

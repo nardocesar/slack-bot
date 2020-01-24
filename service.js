@@ -10,7 +10,13 @@ const getBooking = () => {
     .then(data => data.data);
 }
 
+const getGymInfo = () => {
+    return axios.get('http://5e29b05592edd600140ddf6c.mockapi.io/api/v1/gym_info/1')
+    .then(data => data.data);
+}
+
 module.exports = {
     getTop10Gyms,
-    getBooking
+    getBooking,
+    getGymInfo
 }
